@@ -319,7 +319,7 @@ describe 'docker', :type => :class do
     end
   end
 
-  context 'specific to RedHat' do
+  context 'specific to RedHat 6' do
     let(:facts) { {
       :osfamily => 'RedHat',
       :operatingsystem => 'RedHat',
@@ -379,6 +379,21 @@ describe 'docker', :type => :class do
     it { should contain_package('docker').with_install_options('--enablerepo=ol7_addons') }
 
   end
+
+  context 'specific to Oracle Linux 6' do
+    let(:facts) { {
+      :osfamily => 'RedHat',
+      :operatingsystem => 'OracleLinux',
+      :operatingsystemrelease => '6.5',
+      :operatingsystemmajrelease => '6',
+    } }
+
+    it { should contain_package('docker').with_name('docker').with_ensure('present').with_install_options('--enablerepo=public_ol6_addons,public_ol6_latest') }
+    it { should_not contain_apt__source('docker') }
+    it { should_not contain_class('epel') }
+
+  end
+
 
   context 'specific to Scientific Linux 7 or above' do
     let(:facts) { {

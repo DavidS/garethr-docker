@@ -26,6 +26,7 @@ too:
 * Amazon Linux
 * Fedora
 * Debian
+* Oracle Linux
 
 ## Examples
 
